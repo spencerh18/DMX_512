@@ -35,6 +35,23 @@ void Blink1() {
         TM1650_setDigit(0, ' ', 0);
     }
 
+void Blink2() {
+    static bool value = 0;
+    static time_t lastTime = 0;
+    
+    time_t time = CLOCK_getTime();
+    if(time <= lastTime + 135)
+        return;
+    
+    lastTime = time;
+    value = !value;
+    
+    if(value)
+        TM1650_setDigit(1, '8', 0);
+    else
+        TM1650_setDigit(1, ' ', 0);
+    }
+
 void main(void)
 {
     // initialize the device
@@ -58,5 +75,6 @@ void main(void)
     {
         LED_setColor(dmxFrame[2], dmxFrame[3], dmxFrame[4], dmxFrame[5]); //pass each color slot to the setColor function
         Blink1();
+        Blink2();
     }
 }
