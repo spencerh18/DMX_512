@@ -21,3 +21,7 @@ extern "C" {
 
 #endif	/* CONTROLLER_H */
 
+void CONTROLLER_init();
+void address_inc();
+void address_dec();
+void CONTROLLER_task();

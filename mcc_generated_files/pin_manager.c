@@ -79,8 +79,8 @@ void PIN_MANAGER_Initialize(void)
     WPUx registers
     */
     WPUB = 0x00;
-    WPUA = 0x00;
-    WPUC = 0x00;
+    WPUA = 0x04;
+    WPUC = 0x07;
 
     /**
     ODx registers

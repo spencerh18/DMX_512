@@ -62,3 +62,15 @@ void putch(char holder)
         }
     }
 }
+
+void TM1650_fastPrintNum(uint16_t num) {
+    int arr[4];
+    arr[3] = num % 10 + 48;
+    arr[2] = (num/10) % 10 + 48;
+    arr[1] = (num/100) % 10 + 48;
+    arr[0] = (num/1000) % 10 + 48;
+    
+    for(int i = 0; i <= 3; i++) {
+        TM1650_setDigit(i, arr[i], 0);
+    }
+}
