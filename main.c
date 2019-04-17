@@ -45,5 +45,7 @@ void main(void)
     {
         BUTTONS_task();
         CONTROLLER_task();
+        //pass each color slot to the setColor function
+        LED_setColor(dmxFrame[address], dmxFrame[address + 1], dmxFrame[address + 2], dmxFrame[address + 3]);
     }
 }
