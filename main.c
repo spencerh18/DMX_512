@@ -5,6 +5,8 @@
 #include "controller.h"
 #include "buttons.h"
 
+#define _XTAL_FREQ 4000000
+
 int dmxPointer = 0;
 uint8_t dmxFrame[514]; //size of 514 because the first two are the break and the start and then 512 bytes
 
@@ -36,6 +38,9 @@ void main(void)
 
     // Enable the Peripheral Interrupts
     INTERRUPT_PeripheralInterruptEnable();
+    
+    //prevent the I2C bus from hanging at the start
+    __delay_ms(500);
     
     TM1650init();
     CONTROLLER_init();

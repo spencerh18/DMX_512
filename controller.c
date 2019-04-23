@@ -4,6 +4,7 @@
 #include "tm1650.h"
 
 uint16_t address = 1;
+time_t lastActiveTime = 0;
 
 void CONTROLLER_init() {
     TM1650_fastPrintNum(address);
@@ -38,16 +39,31 @@ void address_dec()
 }
 
 void CONTROLLER_task() {
-    if (BUTTONS_isClicked(up)) {
+    bool active = true;
+    
+    if(BUTTONS_isClicked(up)) {
         address_inc();
-        
-    } else if (BUTTONS_isClicked(down)) {
+        active = true;
+    } else if(BUTTONS_isClicked(down)) {
         address_dec();
+        active = true;
+    } else if(BUTTONS_isHeld(up)) {
+        address_inc();
+        active = true;
+    } else if(BUTTONS_isHeld(down)) {
+        address_dec();
+        active = true;
+    } else {
+        active = false;
     }
-    if (BUTTONS_isHeld(up)) {
-        address_inc();
-        
-    } else if (BUTTONS_isHeld(down)) {
-        address_dec();
+    
+    if(active) {
+        TM1650_enable(true);
+        lastActiveTime = CLOCK_getTime();
+    }
+
+    if(CLOCK_getTime() - lastActiveTime >= 5000) {
+        TM1650_enable(false);
+        lastActiveTime = CLOCK_getTime() - 5001;
     }
 }

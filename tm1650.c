@@ -8,6 +8,7 @@
 #define _XTAL_FREQ 4000000
 
 static int tab = 0;
+int isEnabled;
 
 const uint8_t charTable[] = 
 {
@@ -39,7 +40,7 @@ void TM1650_setDigit(uint8_t digit, uint8_t data, uint8_t DP)
 
 void TM1650init()
 {
-    writeData(0x24, 1); // enable the display
+    TM1650_enable(true); //call the enable function for the display
     TM1650_setDigit(0, 32, 0); // initialize each digit
     TM1650_setDigit(1, 32, 0); // ...
     TM1650_setDigit(2, 32, 0); // ...
@@ -73,4 +74,19 @@ void TM1650_fastPrintNum(uint16_t num) {
     for(int i = 0; i <= 3; i++) {
         TM1650_setDigit(i, arr[i], 0);
     }
+}
+
+void TM1650_enable(bool enable) {
+    if(enable) {
+        writeData(0x24, 1); //enable the display
+        isEnabled = 1;
+    } else {
+        writeData(0x24, 0); //disable the display
+        isEnabled = 0;
+    }
+}
+
+bool TM1650_isEnabled() {
+    return isEnabled;
+    
 }
