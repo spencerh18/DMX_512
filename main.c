@@ -4,24 +4,11 @@
 #include "tm1650.h"
 #include "controller.h"
 #include "buttons.h"
+#include "beat.h"
+#include "DMX.h"
+#include "LED.h"
 
 #define _XTAL_FREQ 4000000
-
-int dmxPointer = 0;
-uint8_t dmxFrame[514]; //size of 514 because the first two are the break and the start and then 512 bytes
-
-void dmx_ISR(void) {
-    if(RC1STAbits.OERR){ //check for overrun error (allows for debugging)
-        RC1STAbits.CREN = 0;
-        RC1STAbits.CREN = 1;
-    }
-    if(RC1STAbits.FERR){ //check for framing error (allows you to differentiate between frames, end of address/slots)
-        dmxPointer = 0;
-    }
-    
-    dmxFrame[dmxPointer++] = RC1REG; //reads data from slots and stores it in the array
-}
-
 
 void main(void)
 {
@@ -45,12 +32,15 @@ void main(void)
     TM1650init();
     CONTROLLER_init();
     BUTTONS_init();
+    BEAT_init();
+    LED_init();
+    
     
     while (1)
     {
         BUTTONS_task();
         CONTROLLER_task();
-        //pass each color slot to the setColor function
-        LED_setColor(dmxFrame[address], dmxFrame[address + 1], dmxFrame[address + 2], dmxFrame[address + 3]);
+        LED_task();
+        BEAT_task();
     }
 }

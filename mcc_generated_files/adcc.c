@@ -55,6 +55,7 @@
 /**
   Section: ADCC Module Variables
 */
+void (*ADCC_ADTI_InterruptHandler)(void);
 
 /**
   Section: ADCC Module APIs
@@ -93,10 +94,10 @@ void ADCC_Initialize(void)
     ADPREH = 0x00;
     // ADDSEN disabled; ADGPOL digital_low; ADIPEN disabled; ADPPOL Vss; 
     ADCON1 = 0x00;
-    // ADCRS 0; ADMD Basic_mode; ADACLR disabled; ADPSIS RES; 
-    ADCON2 = 0x00;
-    // ADCALC First derivative of Single measurement; ADTMD disabled; ADSOI ADGO not cleared; 
-    ADCON3 = 0x00;
+    // ADCRS 5; ADMD Low_pass_filter_mode; ADACLR disabled; ADPSIS RES; 
+    ADCON2 = 0x54;
+    // ADCALC Filtered value vs setpoint; ADTMD ADERR > ADUTH; ADSOI ADGO not cleared; 
+    ADCON3 = 0x56;
     // ADMATH registers not updated; 
     ADSTAT = 0x00;
     // ADNREF VSS; ADPREF VDD; 
@@ -105,10 +106,16 @@ void ADCC_Initialize(void)
     ADACT = 0x00;
     // ADCS FOSC/2; 
     ADCLK = 0x00;
-    // ADGO stop; ADFM right; ADON enabled; ADCS FOSC/ADCLK; ADCONT disabled; 
-    ADCON0 = 0x84;
+    // ADGO stop; ADFM right; ADON enabled; ADCS Frc; ADCONT enabled; 
+    ADCON0 = 0xD4;
     
 
+    // Clear the ADC Threshold interrupt flag
+    PIR1bits.ADTIF = 0;
+    // Enabling ADCC threshold interrupt.
+    PIE1bits.ADTIE = 1;
+
+    ADCC_SetADTIInterruptHandler(ADCC_DefaultInterruptHandler);
 }
 
 void ADCC_StartConversion(adcc_channel_t channel)
@@ -298,6 +305,22 @@ uint8_t ADCC_GetConversionStageStatus(void)
 }
 
 
+void ADCC_ThresholdISR(void)
+{
+    // Clear the ADCC Threshold interrupt flag
+    PIR1bits.ADTIF = 0;
+
+    if (ADCC_ADTI_InterruptHandler)
+        ADCC_ADTI_InterruptHandler();
+}
+
+void ADCC_SetADTIInterruptHandler(void (* InterruptHandler)(void)){
+    ADCC_ADTI_InterruptHandler = InterruptHandler;
+}
+void ADCC_DefaultInterruptHandler(void){
+    // add your ADCC interrupt custom code
+    // or set custom function using ADCC_SetADIInterruptHandler() or ADCC_SetADTIInterruptHandler()
+}
 /**
  End of File
 */

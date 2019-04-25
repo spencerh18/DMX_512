@@ -21,11 +21,13 @@
         <itemPath>mcc_generated_files/tmr2.h</itemPath>
         <itemPath>mcc_generated_files/i2c1.h</itemPath>
       </logicalFolder>
-      <itemPath>PWM.h</itemPath>
       <itemPath>clock.h</itemPath>
       <itemPath>tm1650.h</itemPath>
       <itemPath>buttons.h</itemPath>
       <itemPath>controller.h</itemPath>
+      <itemPath>beat.h</itemPath>
+      <itemPath>LED.h</itemPath>
+      <itemPath>DMX.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -52,11 +54,13 @@
         <itemPath>mcc_generated_files/i2c1.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>PWM.c</itemPath>
       <itemPath>clock.c</itemPath>
       <itemPath>tm1650.c</itemPath>
       <itemPath>buttons.c</itemPath>
       <itemPath>controller.c</itemPath>
+      <itemPath>beat.c</itemPath>
+      <itemPath>LED.c</itemPath>
+      <itemPath>DMX.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

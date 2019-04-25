@@ -74,6 +74,10 @@ void __interrupt() INTERRUPT_InterruptManager (void)
         {
             EUSART1_RxDefaultInterruptHandler();
         } 
+        else if(PIE1bits.ADTIE == 1 && PIR1bits.ADTIF == 1)
+        {
+            ADCC_ThresholdISR();
+        } 
         else
         {
             //Unhandled Interrupt

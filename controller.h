@@ -5,7 +5,6 @@
  * Created on April 16, 2019, 4:38 PM
  */
 
-#include <stdint.h>
 
 #ifndef CONTROLLER_H
 #define	CONTROLLER_H
@@ -23,9 +22,18 @@ extern "C" {
 
 #endif	/* CONTROLLER_H */
 
+#include <stdint.h>
+
+typedef enum {
+    MENU_DMX,
+    MENU_AUTOSPEED
+} menu_t;
+
 void CONTROLLER_init();
 void address_inc();
 void address_dec();
 void CONTROLLER_task();
+static void dmxAddressViewInit();
+static void setMenu(menu_t newMenu);
 
 extern uint16_t address;
