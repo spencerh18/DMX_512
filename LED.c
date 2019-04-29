@@ -63,10 +63,10 @@ void LED_setColor(uint8_t R, uint8_t B, uint8_t G, uint8_t W)
 }
 
 void LED_task() {
-    if(dmx_isActive())
-        mode = MODE_DMX;
-    else
-        mode = MODE_SOUND;
+  if(dmx_isActive())
+      mode = MODE_DMX;
+  else
+      mode = MODE_SOUND;
     
   switch (mode)
   {
@@ -99,6 +99,7 @@ void dmxTask() {
 
 time_t lastRun = 0;
 int i = 0;
+
 void soundTask() {
     
     if (BEAT_detected()) {

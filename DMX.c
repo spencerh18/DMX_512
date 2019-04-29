@@ -34,5 +34,9 @@ void dmx_Enable() {
 }
 
 bool dmx_isActive() {
-    return false;
+    if(dmxPointer > 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
