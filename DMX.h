@@ -24,3 +24,8 @@ extern "C" {
 
 void dmx_ISR(void);
 void dmx_Enable();
+bool dmx_isActive();
+
+extern int dmxPointer;
+extern uint8_t dmxFrame[514];
+extern bool dmxEnable;

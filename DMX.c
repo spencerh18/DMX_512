@@ -32,3 +32,7 @@ void dmx_Enable() {
         dmxEnable = true;
     }
 }
+
+bool dmx_isActive() {
+    return false;
+}

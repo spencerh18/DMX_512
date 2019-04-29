@@ -11,11 +11,14 @@
 
 extern time_t dmxTime;
 extern uint8_t dmxFrame[514];
-extern bool dmxEnable = false;
+extern bool dmxEnable;
+
+color_t colors[8];
+
+mode_t mode;
 
 void LED_init() {
-    color_t colors[8];
-    
+    mode = MODE_SOUND;
     // color 0: red
     colors[0].red = 255;
 
@@ -60,7 +63,12 @@ void LED_setColor(uint8_t R, uint8_t B, uint8_t G, uint8_t W)
 }
 
 void LED_task() {
-  switch (MODE_SOUND)
+    if(dmx_isActive())
+        mode = MODE_DMX;
+    else
+        mode = MODE_SOUND;
+    
+  switch (mode)
   {
   case MODE_AUTO:
     autoTask();
@@ -77,7 +85,7 @@ void LED_task() {
 }
 
 void autoTask() {
-    if(dmxEnable == true) {
+    if(dmxEnable == false) {
         soundTask;
     } else {
         dmxTask;
@@ -90,15 +98,13 @@ void dmxTask() {
 }
 
 time_t lastRun = 0;
-
+int i = 0;
 void soundTask() {
-    if (CLOCK_getTime() - lastRun < 100)
-        return;
-
-    lastRun = CLOCK_getTime();
-    LATC5 = 0;
     
     if (BEAT_detected()) {
-        LATC5 = 1;
+        LED_setColor(colors[i].red, colors[i].blue, colors[i].green, colors[i].white);
+        i++;
+        if(i > 8)
+            i = 0;
     }
 }
