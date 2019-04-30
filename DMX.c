@@ -10,33 +10,49 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+bool dmxEnable;
+bool dmxActive;
+static time_t lastTime = 0;
+
 int dmxPointer = 0;
 uint8_t dmxFrame[514]; //size of 514 because the first two are the break and the start and then 512 bytes
 
 void dmx_ISR(void) {
-    if(RC1STAbits.OERR){ //check for overrun error (allows for debugging)
+    if (RC1STAbits.OERR) { //check for overrun error (allows for debugging)
         RC1STAbits.CREN = 0;
         RC1STAbits.CREN = 1;
     }
-    if(RC1STAbits.FERR){ //check for framing error (allows you to differentiate between frames, end of address/slots)
+    if (RC1STAbits.FERR) { //check for framing error (allows you to differentiate between frames, end of address/slots)
         dmxPointer = 0;
     }
-    
+
     dmxFrame[dmxPointer++] = RC1REG; //reads data from slots and stores it in the array
+    dmxActive = true;
 }
 
-bool dmxEnable = false;
-
-void dmx_Enable() {
-    if(dmxPointer > 0) {
-        dmxEnable = true;
-    }
-}
+//void dmx_Enable() {
+//    if(dmxPointer > 0) {
+//        dmxEnable = true;
+//    }
+//}
 
 bool dmx_isActive() {
-    if(dmxPointer > 0) {
-        return true;
+    return dmxEnable;
+}
+
+void dmx_task() {
+    time_t time = CLOCK_getTime();
+
+    // only run every 10 ms
+    if (time - lastTime < 1000)
+        return;
+
+    lastTime = time;
+
+    if (dmxActive) {
+        dmxActive = false;
+        dmxEnable = true;
     } else {
-        return false;
+        dmxEnable = false;
     }
 }

@@ -26,7 +26,7 @@ extern "C" {
 void LED_task();
 void soundTask();
 void dmxTask();
-void autoTask();
+//void autoTask();
 void LED_setColor(uint8_t R, uint8_t B, uint8_t G, uint8_t W);
 void LED_init();
 

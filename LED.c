@@ -19,6 +19,7 @@ mode_t mode;
 
 void LED_init() {
     mode = MODE_SOUND;
+    
     // color 0: red
     colors[0].red = 255;
 
@@ -63,16 +64,17 @@ void LED_setColor(uint8_t R, uint8_t B, uint8_t G, uint8_t W)
 }
 
 void LED_task() {
-  if(dmx_isActive())
+  if(dmxEnable) {
       mode = MODE_DMX;
-  else
+  } else {
       mode = MODE_SOUND;
+  }
     
   switch (mode)
   {
-  case MODE_AUTO:
-    autoTask();
-    break;
+//  case MODE_AUTO:
+//    autoTask();
+//    break;
 
   case MODE_DMX:
     dmxTask();
@@ -84,20 +86,19 @@ void LED_task() {
   }
 }
 
-void autoTask() {
-    if(dmxEnable == false) {
-        soundTask;
-    } else {
-        dmxTask;
-    }
-}
+//void autoTask() {
+//    if(dmxEnable == false) {
+//        soundTask;
+//    } else {
+//        dmxTask;
+//    }
+//}
 
 void dmxTask() {
     //pass each color slot to the setColor function
     LED_setColor(dmxFrame[address], dmxFrame[address + 1], dmxFrame[address + 2], dmxFrame[address + 3]);
 }
 
-time_t lastRun = 0;
 int i = 0;
 
 void soundTask() {
