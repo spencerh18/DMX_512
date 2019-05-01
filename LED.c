@@ -19,40 +19,40 @@ mode_t mode;
 
 void LED_init() {
     mode = MODE_SOUND;
+            
+    //color: white
+    colors[0].white = 255;
     
-    // color 0: red
-    colors[0].red = 255;
-
-    // color 1: green
-    colors[1].green = 255;
-
-    // color 2: blue
-    colors[2].blue = 255;
+    // color: red
+    colors[1].red = 255;
     
-    // color 3: white
-    colors[3].white = 255;
+    // color: orange
+    colors[2].red = 255;
+    colors[2].green = 128;
+    
+    // color: yellow
+    colors[3].red = 255;
+    colors[3].green = 255;
 
-    // color 4: orange
-    colors[4].red = 255;
-    colors[4].green = 128;
+    // color: green
+    colors[4].green = 255;
+    
+    // color: cyan
+    colors[5].green = 255;
+    colors[5].blue = 128;
 
-    // color 5: purple
-    colors[5].red = 128;
-    colors[5].blue = 255;
+    // color: blue
+    colors[6].blue = 255;
 
-    // colors 6: yellow
-    colors[6].red = 255;
-    colors[6].green = 255;
-
-    // colors 7: seafoam
-    colors[7].green = 255;
-    colors[7].blue = 128;
-
-    // colors 8: everything
-    colors[8].red = 255;
-    colors[8].green = 255;
-    colors[8].blue = 255;
-    colors[8].white = 255;
+    // color: purple
+    colors[7].red = 128;
+    colors[7].blue = 255;
+    
+    // color: black
+    colors[8].red = 0;
+    colors[8].blue = 0;
+    colors[8].green = 0;
+    colors[8].white = 0;
 }
 
 void LED_setColor(uint8_t R, uint8_t B, uint8_t G, uint8_t W)
