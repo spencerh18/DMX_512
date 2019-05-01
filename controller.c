@@ -8,6 +8,8 @@
 #include "DMX.h"
 #include "LED.h"
 
+#define _XTAL_FREQ 4000000
+
 uint16_t address = 1;
 time_t lastActiveTime = 0;
 
@@ -50,9 +52,11 @@ void CONTROLLER_task() {
         active = true;
     } else if(BUTTONS_isHeld(up)) {
         address_inc();
+        __delay_ms(100);
         active = true;
     } else if(BUTTONS_isHeld(down)) {
         address_dec();
+        __delay_ms(100);
         active = true;
     } else {
         active = false;
