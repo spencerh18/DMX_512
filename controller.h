@@ -9,6 +9,15 @@
 #ifndef CONTROLLER_H
 #define	CONTROLLER_H
 
+#include <stdint.h>
+
+void CONTROLLER_init();
+void address_inc();
+void address_dec();
+void CONTROLLER_task();
+
+extern uint16_t address;
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -22,18 +31,3 @@ extern "C" {
 
 #endif	/* CONTROLLER_H */
 
-#include <stdint.h>
-
-typedef enum {
-    MENU_DMX,
-    MENU_AUTOSPEED
-} menu_t;
-
-void CONTROLLER_init();
-void address_inc();
-void address_dec();
-void CONTROLLER_task();
-static void dmxAddressViewInit();
-static void setMenu(menu_t newMenu);
-
-extern uint16_t address;

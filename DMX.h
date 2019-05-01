@@ -8,6 +8,15 @@
 #ifndef DMX_H
 #define	DMX_H
 
+void dmx_ISR(void);
+bool dmx_isActive();
+void dmx_task();
+
+extern int dmxPointer;
+extern uint8_t dmxFrame[514];
+extern bool dmxEnable;
+extern bool dmxActive;
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -22,12 +31,3 @@ extern "C" {
 #endif	/* DMX_H */
 
 
-void dmx_ISR(void);
-void dmx_Enable();
-bool dmx_isActive();
-void dmx_task();
-
-extern int dmxPointer;
-extern uint8_t dmxFrame[514];
-extern bool dmxEnable;
-extern bool dmxActive;

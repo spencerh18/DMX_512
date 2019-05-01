@@ -5,6 +5,15 @@
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 
+// declare functions from tm1650.c file
+static void writeData(uint8_t address, uint8_t data);
+void TM1650init();
+void TM1650_setDigit(uint8_t digit, uint8_t data, uint8_t DP);
+void putch(char holder);
+void TM1650_fastPrintNum(uint16_t num);
+void TM1650_enable(bool enable);
+bool TM1650_isEnabled();
+
 #ifdef	__cplusplus
 extern "C" {
 #endif /* __cplusplus */
@@ -18,12 +27,3 @@ extern "C" {
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 
-
-// declare functions from tm1650.c file
-static void writeData(uint8_t address, uint8_t data);
-void TM1650init();
-void TM1650_setDigit(uint8_t digit, uint8_t data, uint8_t DP);
-void putch(char holder);
-void TM1650_fastPrintNum(uint16_t num);
-void TM1650_enable(bool enable);
-bool TM1650_isEnabled();

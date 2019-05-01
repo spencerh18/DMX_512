@@ -30,12 +30,6 @@ void dmx_ISR(void) {
     dmxActive = true;
 }
 
-//void dmx_Enable() {
-//    if(dmxPointer > 0) {
-//        dmxEnable = true;
-//    }
-//}
-
 bool dmx_isActive() {
     return dmxEnable;
 }
@@ -43,7 +37,7 @@ bool dmx_isActive() {
 void dmx_task() {
     time_t time = CLOCK_getTime();
 
-    // only run every 10 ms
+    // only run every 1 second
     if (time - lastTime < 1000)
         return;
 

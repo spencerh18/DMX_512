@@ -72,10 +72,6 @@ void LED_task() {
     
   switch (mode)
   {
-//  case MODE_AUTO:
-//    autoTask();
-//    break;
-
   case MODE_DMX:
     dmxTask();
     break;
@@ -85,14 +81,6 @@ void LED_task() {
     break;
   }
 }
-
-//void autoTask() {
-//    if(dmxEnable == false) {
-//        soundTask;
-//    } else {
-//        dmxTask;
-//    }
-//}
 
 void dmxTask() {
     //pass each color slot to the setColor function

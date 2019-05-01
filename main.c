@@ -15,7 +15,8 @@ void main(void)
     // initialize the device
     SYSTEM_Initialize();
     CLOCK_init();
-    EUSART1_SetRxInterruptHandler(dmx_ISR); //using custom isr above in place of the mcc generated isr
+    //using custom isr in place of the mcc generated isr
+    EUSART1_SetRxInterruptHandler(dmx_ISR);
     
     // When using interrupts, you need to set the Global and Peripheral Interrupt Enable bits
     // Use the following macros to:

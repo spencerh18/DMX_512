@@ -15,10 +15,6 @@ void CONTROLLER_init() {
     TM1650_fastPrintNum(address);
 }
 
-void CONTROLLER_getMode() {
-    
-}
-
 // Increments the address and updates the display 
 void address_inc()
 {
@@ -72,60 +68,3 @@ void CONTROLLER_task() {
         lastActiveTime = CLOCK_getTime() - 5001;
     }
 }
-    
-//    bool wasActive = false;
-//    
-//    if(DMX_isActive()) {
-//        setMode(MODE_DMX);
-//    } else {
-//        setMode(MODE_SOUND);
-//    }
-//    
-//    if(BUTTONS_isClicked(menu))
-//    {
-//        advanceMenu();
-//        wasActive = true;
-//    }
-//    
-//    switch (menuMode) {
-//        case MENU_DMX:
-//            wasActive = dmxAddressViewTask();
-//            break;
-//        case MENU_AUTOSPEED:
-//            wasActive = autoSpeedViewTask();
-//    }
-//
-//    if (wasActive) {
-//        TM1650_enable(true);
-//        lastActiveTime = CLOCK_getTime();
-//    }
-//
-//    if (CLOCK_getTime() - lastActiveTime >= 5000) {
-//        TM1650_enable(false);
-//        lastActiveTime = CLOCK_getTime() - 5001;
-//    }
-//}
-//
-//static void dmxAddressViewInit() {
-//    TM1650_setDigit(0, 'd', 0);
-//    TM1650_fastPrintNum(address);
-//}
-//
-//static void autoSpeedViewInit() {
-//    
-//}
-//
-//static void setMenu(menu_t newMenu) {
-//    if(menuMode == newMenu)
-//        return;
-//    menuMode = newMenu;
-//    
-//    switch (menuMode) {
-//        case MENU_DMX:
-//            dmxAddressViewInit();
-//            break;
-//        case MENU_AUTOSPEED:
-//            autoSpeedViewInit();
-//            break;
-//    }
-//}

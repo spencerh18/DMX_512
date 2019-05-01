@@ -8,14 +8,16 @@
 #ifndef CLOCK_H
 #define	CLOCK_H
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
 typedef uint16_t time_t;
 
 void CLOCK_init();
 time_t CLOCK_getTime();
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
+
+
 
 
 #ifdef	__cplusplus

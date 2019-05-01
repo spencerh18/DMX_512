@@ -53,13 +53,6 @@ bool BEAT_detected() {
     return false;
 }
 
-//// redirect printf() to the UART. Comment this out
-//// to use a TM1650 putch())
-//void putch(char character) {
-//    while (!TX1STAbits.TRMT);
-//    TXREG = character;
-//}
-
 void BEAT_task() {
     // don't bother doing anything if the display is on
     if (TM1650_isEnabled())

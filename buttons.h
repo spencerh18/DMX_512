@@ -8,18 +8,6 @@
 #ifndef BUTTONS_H
 #define	BUTTONS_H
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* BUTTONS_H */
-
 #include <stdint.h>
 #include <stdbool.h>
     
@@ -48,3 +36,16 @@ extern button_t *up, *down, *enter, *menu;
 void BUTTONS_task();
 bool BUTTONS_isClicked(button_t* button);
 bool BUTTONS_isHeld(button_t* button);
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
+
+
+
+#ifdef	__cplusplus
+}
+#endif
+
+#endif	/* BUTTONS_H */
+
